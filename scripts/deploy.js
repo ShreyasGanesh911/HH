@@ -1,7 +1,10 @@
 const {ethers,run,network} = require('hardhat')
 
 const main = async()=>{
+  //  Mention the solidity file name
+  
   const simpleStoragefactory = await ethers.getContractFactory("SimpleStorage")
+  // Deploying the contract
   const contract = await simpleStoragefactory.deploy()
   console.log('deploying contract')
   // unlike the conventional way of writting contracts, if we dont specify the network(RPC) and private key by default hardhat sets it to hardhat network similar to Ganache
@@ -9,7 +12,8 @@ const main = async()=>{
   console.log(address)
   // console.log(network.config)
   // hardhat chainId = 31337
-  if(network.config.chainId===4 && process.env.ETHERSCAN_API){
+  if(network.config.chainId===11155111 && process.env.ETHERSCAN_API){
+    console.log("wait im here")
     await contract.deploymentTransaction().wait(6)
     await verify(address,[])
   }
